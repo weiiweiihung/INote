@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: jenny
+Build-Jdk: 14.0.2
+Implementation-Title: MyJBank
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.org.idv
+Implementation-URL: http://www.example.com
+Created-By: Maven Integration for Eclipse
+

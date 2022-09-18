@@ -1,8 +1,11 @@
 package com.org.idv.MyJBank.a;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.org.idv.MyJBank.a.entity.HelloReq;
+import com.org.idv.MyJBank.a.entity.HelloRes;
 import com.org.idv.MyJBank.db.impl.UserLoginImpl;
 import com.org.idv.MyJBank.db.vo.UserLoginVO;
 
@@ -17,12 +20,20 @@ import com.org.idv.MyJBank.db.vo.UserLoginVO;
 public class HelloController {
 
 	@RequestMapping("/hello")
-	 public String getHello() {
+	 public String getHello(@RequestBody HelloReq req) {
 		
         UserLoginImpl impl = new UserLoginImpl();
-        UserLoginVO vo = impl.login("many77", "abc123");
+        UserLoginVO vo = impl.login(req.getUserName(), req.getPass()); // "many77", "abc123"
         
-        return vo.toString();
+        HelloRes res = new HelloRes();
+        if(vo==null) {
+        	 res.setRc("M999"); //登入失敗
+        	
+        } else {
+        	res.setRc("M000");	//登入成功
+        }
+        
+        return res.getRc();
     }
 
 }

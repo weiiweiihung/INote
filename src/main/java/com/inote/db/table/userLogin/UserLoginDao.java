@@ -44,7 +44,7 @@ public class UserLoginDao implements FactoryDao {
 		String sqlStr = "INSERT INTO UserLogin (UserName, UserPass, CustName, CustCell, CustBirth)"
 				+ "VALUES (?, ?, ?, ?, ?);";
 		int code = 0;
-
+		
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conn.prepareStatement(sqlStr);

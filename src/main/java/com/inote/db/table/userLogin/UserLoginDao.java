@@ -1,19 +1,21 @@
 package com.inote.db.table.userLogin;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.core.env.AbstractPropertyResolver;
-
 import com.inote.db.FactoryDao;
+import com.inote.db.RDBConnection;
 
 public class UserLoginDao implements FactoryDao {
 
 	public UserLoginModel login(String name, String password) {
 		String sqlStr = "select * from UserLogin where UserName=? and UserPass=?";
 		PreparedStatement preparedStatement = null;
+		Connection conn = null;
 		try {
+			conn = RDBConnection.getConnect("APDATA");
 			preparedStatement = conn.prepareStatement(sqlStr);
 			preparedStatement.setString(1,name);
 			preparedStatement.setString(2,password);
@@ -26,7 +28,7 @@ public class UserLoginDao implements FactoryDao {
 				
 				return vo;
 			}
-			
+			preparedStatement.clearParameters();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -46,7 +48,9 @@ public class UserLoginDao implements FactoryDao {
 		int code = 0;
 		
 		PreparedStatement preparedStatement = null;
+		Connection conn = null;
 		try {
+			conn = RDBConnection.getConnect("APDATA");
 			preparedStatement = conn.prepareStatement(sqlStr);
 			preparedStatement.setString(1,model.getUserName());
 			preparedStatement.setString(2,model.getUserPass());

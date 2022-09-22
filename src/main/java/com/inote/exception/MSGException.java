@@ -12,6 +12,7 @@ public class MSGException extends Exception {
 	}
 
 	public MSGException(String message) {
+		super(message);
 	}
 }
 

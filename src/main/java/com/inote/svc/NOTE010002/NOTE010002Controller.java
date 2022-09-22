@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.inote.db.table.userLogin.UserLoginDao;
 import com.inote.db.table.userLogin.UserLoginModel;
+import com.inote.exception.MSGException;
+import com.inote.svc.SvcDad;
 
 /**
  * 
@@ -15,32 +17,13 @@ import com.inote.db.table.userLogin.UserLoginModel;
  *	url (http://localhost:8080/NOTE010001)
  */
 @RestController
-public class NOTE010002Controller {
+public class NOTE010002Controller implements SvcDad<NOTE010002Req> {
 
+	@Override
 	@RequestMapping("/NOTE010002")
-	 public String getHello(@RequestBody NOTE010002Req req) {
-		System.out.println("***: "+req);
-        
-        UserLoginModel model = new UserLoginModel();
-        model.setUserName 	(req.getUserName	());
-        model.setUserPass 	(req.getPass		());
-        model.setCustName 	(req.getcCustName 	());
-        model.setCustCell	(req.getcCustCell 	());
-        model.setCustBirth 	(req.getcCustBirth	());
-
-        UserLoginDao impl = new UserLoginDao();
-        int i = impl.addUser(model);
-        
-        NOTE010002Res res = new NOTE010002Res();
-        if(i==1) {
-        	res.setRc("M000");	//insert成功
-        	
-        } else {
-        	res.setRc("M999"); //insert失敗
-        	
-        }
-        
-        return res.getRc();
+	public String doSvc(@RequestBody NOTE010002Req req) throws MSGException {
+		NOTE010002 note010002 = new NOTE010002();
+		return note010002.doSvc(req);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.inote.svc.NOTE010001;
 
-public class NOTE010001Req {
+import com.inote.svc.ReqDad;
+
+public class NOTE010001Req extends ReqDad {
 	protected String userName;
 	protected String pass;
 	

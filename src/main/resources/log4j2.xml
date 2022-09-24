@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE xml>
+<!-- OFF>FATAL> ERROR> WARN> INFO> DEBUG> TRACE> ALL -->
+<!-- Configuration.monitorinterval 每X秒 動態加載配置 -->
+<Configuration status="trace" monitorinterval="1">
+	<properties>
+		<property name="LOG_HOME">D:/LOG_INOTE</property>
+		<property name="FILE_NAME">INOTE_log</property>
+		<property name="LOG_PATTERN">%highlight{%throwable}[%t][%C][%c][%d{yyyy/MM/dd HH:mm:ss.SSS}][%logger][%-5level]%msg%n</property>
+		<!--	
+		%r [%t] %p %c %notEmpty{%ndc }- %m%n 
+		%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+		-->
+		<property name="LOG_TimeBased">1</property>
+		<property name="LOG_SizeBased">1 MB</property>
+		<property name="LOG_RolloverMax">5</property>
+	</properties>
+	<Appenders>
+		<Console name="Appenders.Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+		
+		
+		
+		<!-- 輸出到檔案 -->
+		<!-- <RollingFile name="LogFile" fileName="${LOG_HOME}/${FILE_NAME}[${hostName}].txt" 
+			filePattern="${LOG_HOME}/$${date:yyyyMMdd}/${FILE_NAME}-%d{yyyy-MM-dd_HH}-%i[${hostName}].txt"> -->
+		<RollingFile name="LogFile"
+			fileName="${LOG_HOME}/${hostName}_${FILE_NAME}.txt"
+			filePattern="${LOG_HOME}/$${date:yyyyMMdd}/${hostName}_${FILE_NAME}-%d{yyyy-MM-dd_HH}-%i.txt">
+			<!-- 輸出格式 -->
+			<PatternLayout charset="${LOG_CHARSET}"
+				pattern="[%d{yyyy/MM/dd HH:mm:ss.SSS}][%X{ip}][%X{sid}][%logger][%-5level]%msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="360" />
+		</RollingFile>
+
+		<File name="Appenders.F" fileName="temp">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</File>
+		<!-- 
+		RollingRandomAccessFile.fileName		指定當前日誌文件的位置和文件名稱
+		RollingRandomAccessFile.filePattern 	指定當發生Rolling時，文件的轉移和重命名規則
+		-->
+		<RollingRandomAccessFile name="Appenders.RRAF"  
+            fileName="${LOG_HOME}/${FILE_NAME}.log"  
+            filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">  
+            
+            <PatternLayout charset="${LOG_CHARSET}" pattern="${LOG_PATTERN}" />
+            <!-- 
+            Policies.TimeBasedTriggeringPolicy filePattern 最小的時間粒度 mm，代表每分鐘1文件
+            DefaultRolloverStrategy 指定最多保存的文件個數
+			變成每分鐘 五個文件
+            Policies.SizeBasedTriggeringPolicy 當文件X MB時，觸發Rolling
+            -->  
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="${LOG_TimeBased}" />
+                <SizeBasedTriggeringPolicy size="${LOG_SizeBased}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${LOG_RolloverMax}" />
+        </RollingRandomAccessFile>
+        
+		<Async name="Appenders.ASYNC">
+			<AppenderRef ref="Appenders.F" />
+			<AppenderRef ref="Appenders.RRAF" />
+			<AppenderRef ref="Appenders.Console"/>
+		</Async>
+
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<!-- <AppenderRef ref="Console" /> -->
+			<!-- <AppenderRef ref="LogFile" /> -->
+			<AppenderRef ref="Appenders.ASYNC" />
+		</Root>
+	</Loggers>
+</Configuration>

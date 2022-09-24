@@ -7,13 +7,16 @@ import com.inote.db.table.userLogin.UserLoginModel;
 import com.inote.svc.SvcDadInterface;
 import com.inote.tool.JacksonTool;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 public class NOTE010001 implements SvcDadInterface<NOTE010001Req,NOTE010001Res> {
 
 	@Override
 	public NOTE010001Res doSvc(@RequestBody NOTE010001Req req){
+		// Logger logger = LoggerFactory.getLogger(getClass());
+		log.info("************ "+req);
 		System.out.println("***: "+req);
-		
-		
         UserLoginDao impl = new UserLoginDao();
         UserLoginModel vo = impl.login(req.getUserName(), req.getPass()); // "many77", "abc123"
         

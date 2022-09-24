@@ -2,15 +2,19 @@ package com.inote.svc.NOTE010002;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inote.db.table.userLogin.UserLoginDao;
 import com.inote.db.table.userLogin.UserLoginModel;
 import com.inote.exception.MSGException;
-import com.inote.svc.SvcDad;
+import com.inote.svc.SvcDadInterface;
+import com.inote.svc.NOTE010001.NOTE010001Req;
+import com.inote.svc.NOTE010001.NOTE010001Res;
+import com.inote.tool.JacksonTool;
 
-public class NOTE010002 implements SvcDad<NOTE010002Req> {
+public class NOTE010002 implements SvcDadInterface<NOTE010002Req,NOTE010002Res> {
 	
 	@Override
-	public String doSvc(@RequestBody NOTE010002Req req) throws MSGException {
+	public NOTE010002Res doSvc(@RequestBody NOTE010002Req req) throws MSGException {
 		System.out.println("***: "+req);
 		NOTE010002Res res = new NOTE010002Res();
 		
@@ -21,9 +25,9 @@ public class NOTE010002 implements SvcDad<NOTE010002Req> {
         UserLoginModel model = new UserLoginModel();
         model.setUserName 	(req.getUserName	());
         model.setUserPass 	(req.getPass		());
-        model.setCustName 	(req.getcCustName 	());
-        model.setCustCell	(req.getcCustCell 	());
-        model.setCustBirth 	(req.getcCustBirth	().replace("-", ""));
+        model.setCustName 	(req.getCustName	());
+        model.setCustCell	(req.getCustCell	());
+        model.setCustBirth 	(req.getCustBirth	().replace("-", ""));
 
         UserLoginDao impl = new UserLoginDao();
         int i = impl.addUser(model);
@@ -37,18 +41,17 @@ public class NOTE010002 implements SvcDad<NOTE010002Req> {
         	res.setRc("M999"); //insert失敗
         	
         }
-        
-        System.out.println("res.getRc(): "+res.getRc());
-        return res.getRc();
+	
+        return JacksonTool.toJsonRes(JacksonTool.getResJsonStr(res), NOTE010002Res.class);
 	}
 	
 	private static boolean reqCheck(NOTE010002Req req) {
 		return
-				!req.userName.trim().equals("")  &&
-				!req.pass.trim().equals("") 	 &&
-				!req.cCustName.trim().equals("") &&
-				!req.cCustCell.trim().equals("") &&
-				!req.cCustBirth.trim().equals("") 
+				!req.getUserName().trim().equals("")  &&
+				!req.getPass().trim().equals("") 	 &&
+				!req.getCustName().trim().equals("") &&
+				!req.getCustCell().trim().equals("") &&
+				!req.getCustBirth().trim().equals("") 
 				? true : false ;
 	}
 }

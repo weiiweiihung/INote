@@ -3,8 +3,8 @@ package com.inote.svc.NOTE010001;
 import com.inote.svc.ReqDad;
 
 public class NOTE010001Req extends ReqDad {
-	protected String userName;
-	protected String pass;
+	private String userName;
+	private String pass;
 	
 	public String getUserName() {
 		return userName;

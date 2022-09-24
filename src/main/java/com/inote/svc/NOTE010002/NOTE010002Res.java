@@ -1,14 +1,17 @@
 package com.inote.svc.NOTE010002;
 
-public class NOTE010002Res {
-	protected String rc;
+import com.inote.svc.ResDad;
+import com.inote.tool.JacksonTool;
 
-	public String getRc() {
-		return rc;
-	}
+import lombok.Getter;
+import lombok.Setter;
 
-	public void setRc(String rc) {
-		this.rc = rc;
-	}
+@Getter
+@Setter
+public class NOTE010002Res extends ResDad {
 	
+	@Override
+	public String toString() {
+		return JacksonTool.writeValueToString(this);		
+	}
 }

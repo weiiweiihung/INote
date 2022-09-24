@@ -42,7 +42,8 @@ public class NOTE010002 implements SvcDadInterface<NOTE010002Req,NOTE010002Res> 
         	
         }
 	
-        return JacksonTool.toJsonRes(JacksonTool.getResJsonStr(res), NOTE010002Res.class);
+        // JacksonTool.toJsonRes(JacksonTool.getResJsonStr(res), NOTE010002Res.class);
+        return res;
 	}
 	
 	private static boolean reqCheck(NOTE010002Req req) {

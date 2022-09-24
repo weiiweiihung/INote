@@ -27,6 +27,7 @@ public class NOTE010001 implements SvcDadInterface<NOTE010001Req,NOTE010001Res> 
 
 		//NOTE010001Res deserializedWriter = mapper.readValue(jsonString, NOTE010001Res.class);
         
-        return JacksonTool.toJsonRes(JacksonTool.getResJsonStr(res), NOTE010001Res.class);
+        //JacksonTool.toJsonRes(JacksonTool.getResJsonStr(res), NOTE010001Res.class)
+        return res;
     }
 }

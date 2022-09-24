@@ -29,8 +29,9 @@ public class NOTE010001 implements SvcDadInterface<NOTE010001Req,NOTE010001Res> 
         	 res.setRc("M999"); //登入失敗
         	
         } else {
-        	res.setRc(NOTE010001CodeEnum.M000.toString());	//登入成功
-        	res.setMsg(msg.selectKey(NOTE010001CodeEnum.M000.toString()).getMSGCh());	//登入成功
+        	String code = NOTE010001CodeEnum.M000.toString();
+        	res.setRc(code);	//登入成功
+        	res.setMsg(msg.selectKey(code).getMSGCh());	//登入成功
         }
 
 		//NOTE010001Res deserializedWriter = mapper.readValue(jsonString, NOTE010001Res.class);

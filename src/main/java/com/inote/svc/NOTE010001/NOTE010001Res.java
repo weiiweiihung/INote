@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter 
 @Setter
-public class NOTE010001Res extends ResDad{
+public class NOTE010001Res extends ResDad {
 
 	public NOTE010001result result;
 	

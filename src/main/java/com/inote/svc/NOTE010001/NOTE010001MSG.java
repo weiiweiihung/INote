@@ -2,13 +2,12 @@ package com.inote.svc.NOTE010001;
 
 import com.inote.svc.MsgDad;
 
-import lombok.Getter;
-
-public class NOTE010001MSG extends MsgDad{
+public class NOTE010001MSG extends MsgDad<NOTE010001Res>{
 	
 	public enum NOTE010001CodeEnum {
-		M000;
-		
+		N0100011
+		, N0100012
+		, N01000132;
 //		M000("M000");
 //		
 //		@Getter
@@ -18,6 +17,4 @@ public class NOTE010001MSG extends MsgDad{
 //			this.code = code;
 //		}
 	}
-
-	
 }

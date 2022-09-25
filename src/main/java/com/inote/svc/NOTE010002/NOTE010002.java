@@ -51,7 +51,7 @@ public class NOTE010002 implements SvcDadInterface<NOTE010002Req,NOTE010002Res> 
         return model;
 	}
 	
-	private static boolean reqCheck(NOTE010002Req req) {
+	private boolean reqCheck(NOTE010002Req req) {
 		return
 				!req.getUserName().trim().equals("")  &&
 				!req.getPass().trim().equals("") 	 &&

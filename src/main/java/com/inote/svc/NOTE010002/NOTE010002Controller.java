@@ -1,5 +1,6 @@
 package com.inote.svc.NOTE010002;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ import com.inote.svc.NOTE010001.NOTE010001Res;
 public class NOTE010002Controller implements ControllerDadInterface<NOTE010002Req,NOTE010002Res> {
 
 	@Override
-	@RequestMapping("/NOTE010002")
+	@PostMapping("/NOTE010002")
 	public NOTE010002Res doController(@RequestBody NOTE010002Req req) throws MSGException {
 		NOTE010002 note010002 = new NOTE010002();
 		return note010002.doSvc(req);

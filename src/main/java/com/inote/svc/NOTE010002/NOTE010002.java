@@ -10,6 +10,11 @@ import com.inote.svc.NOTE010002.NOTE010002MSG.NOTE010002CodeEnum;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * 新增使用者
+ * @author jenny
+ *
+ */
 @Log4j2
 public class NOTE010002 implements SvcDadInterface<NOTE010002Req,NOTE010002Res> {
 	

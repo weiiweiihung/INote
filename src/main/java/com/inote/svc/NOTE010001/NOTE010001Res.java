@@ -19,7 +19,7 @@ public class NOTE010001Res extends ResDad {
 		private String a;
 		private String b;
 		private String c;
-
+ 
 	}
 
 //	@Override

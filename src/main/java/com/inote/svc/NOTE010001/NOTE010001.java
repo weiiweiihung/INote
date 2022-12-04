@@ -27,7 +27,7 @@ public class NOTE010001 implements SvcDadInterface<NOTE010001Req,NOTE010001Res> 
 		log.info("req: "+req);
         UserLoginDao impl = new UserLoginDao();
         UserLoginModel vo = impl.login(req.getUserName(), req.getPass()); // "many77", "abc123"
-System.out.println("*** "+vo);        
+
         NOTE010001Res res = new NOTE010001Res();
         NOTE010001MSG msg = new NOTE010001MSG();
         

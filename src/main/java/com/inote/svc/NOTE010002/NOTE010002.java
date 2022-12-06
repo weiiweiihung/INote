@@ -36,7 +36,7 @@ public class NOTE010002 implements SvcDadInterface<NOTE010002Req,NOTE010002Res> 
 			throw new MSGException();
 		}
 
-        int iAddUser = impl.addUser(setResModel(req));      
+        int iAddUser = impl.addUser(setResModel(req));
         if(iAddUser==1) {
         	msg.setMessage(res, cN0100021);        	
         }

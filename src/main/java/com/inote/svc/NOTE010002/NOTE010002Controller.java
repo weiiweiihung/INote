@@ -28,5 +28,4 @@ public class NOTE010002Controller implements ControllerDadInterface<NOTE010002Re
 		NOTE010002 note010002 = new NOTE010002();
 		return note010002.doSvc(req);
     }
-
 }
